@@ -37,6 +37,7 @@ public class PanGame extends JPanel implements KeyListener {
     Random r = new Random();
     PanScore panScore;
     boolean bScore = false, bStart = true;
+    String sButton;
 
     public PanGame(PanScore _panScore) {
         panScore = _panScore;
@@ -45,22 +46,29 @@ public class PanGame extends JPanel implements KeyListener {
         timerDoge.start();
         setFocusable(true);
         requestFocus();
-        map.put('q', 0);
-        map.put('w', 1);
-        map.put('e', 2);
-        map.put('a', 3);
-        map.put('s', 4);
-        map.put('d', 5);
-        map.put('z', 6);
-        map.put('x', 7);
-        map.put('v', 8);
+        map.put('1', 0);
+        map.put('2', 1);
+        map.put('3', 2);
+        map.put('4', 3);
+        map.put('q', 4);
+        map.put('w', 5);
+        map.put('e', 6);
+        map.put('r', 7);
+        map.put('a', 8);
+        map.put('s', 9);
+        map.put('d', 10);
+        map.put('f', 11);
+        map.put('z', 12);
+        map.put('x', 13);
+        map.put('c', 14);
+        map.put('v', 15);
         this.setLayout(new GridLayout(4, 4));
         for (int i = 0; i < arBtnDoge.length; i++) {
-            char ch[] = {'1', '2', '3', '4', 'q' , 'w', 'e' ,'r','a','s','d','f','z','x','c','v'};
+            char ch[] = {'1', '2', '3', '4', 'q', 'w', 'e', 'r', 'a', 's', 'd', 'f', 'z', 'x', 'c', 'v'};
             arBtnDoge[i] = new BtnDoge(i);
             add(arBtnDoge[i]);
             String sCh = "";
-            sCh+=ch[i];
+            sCh += ch[i];
             arBtnDoge[i].setName(sCh);
             System.out.println(arBtnDoge[i].getName());
             //System.out.println("Button" + i +" created");
@@ -78,8 +86,8 @@ public class PanGame extends JPanel implements KeyListener {
         if (!bScore && !bStart) {
             arBtnDoge[ranDoge].flip();
         }
-        char chButton = arBtnDoge[ranDoge].getName().charAt(0);
         ranDoge = r.nextInt(16);
+        sButton = arBtnDoge[ranDoge].getName();
         arBtnDoge[ranDoge].flip();
         bScore = false;
         bStart = false;
@@ -87,24 +95,26 @@ public class PanGame extends JPanel implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        int nKey = e.getKeyCode();
-        int nNewKey = nKey - 96;
-        Integer value = map.get(nNewKey);
-        //try {
-        if (value == ranDoge) {
-            arBtnDoge[value].flip();
-            nScore++;
-            //System.out.println(nScore);
-            panScore.UpdateScoreLabel(nScore);
-            bScore = true;
+        for (int i = 0; i < arBtnDoge.length; i++) {
+            if (e.getKeyChar() == ranDoge) {
+            };
         }
     }
 
     @Override
+//    public void keyPressed(KeyEvent e) {
+//        int nKey = e.getKeyCode();
+//        int nNewKey = nKey - 96;
+//        Integer value = map.get(nNewKey);
+//        //try {
+//        if (value == ranDoge) {
+//            arBtnDoge[value].flip();
+//            nScore++;
+//            //System.out.println(nScore);
+//            panScore.UpdateScoreLabel(nScore);
+//            bScore = true;
+//        }
+//    }
     public void keyReleased(KeyEvent e) {
     }
     ActionListener updateDoge = new ActionListener() {
@@ -113,4 +123,9 @@ public class PanGame extends JPanel implements KeyListener {
             randomize();
         }
     };
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
